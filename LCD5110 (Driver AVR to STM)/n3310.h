@@ -84,9 +84,9 @@ byte LcdPixel      ( byte x, byte y, LcdPixelMode mode );   // Точка
 byte LcdLine       ( byte x1, byte y1, byte x2, byte y2, LcdPixelMode mode );   // Линия
 byte LcdCircle     ( byte x, byte y, byte radius, LcdPixelMode mode);   // Окружность
 byte LcdRect       ( byte x1, byte y1, byte x2, byte y2, LcdPixelMode mode );   // Прямоугольник
-byte LcdSingleBar  ( byte baseX, byte baseY, byte height, byte width, LcdPixelMode mode );   // Один 
+byte LcdSingleBar ( byte x1, byte y1, byte x2, byte y2, LcdPixelMode mode ); // Закрашенный прямоугольник
 byte LcdBars       ( byte data[], byte numbBars, byte width, byte multiplier );   // Несколько
-byte LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent);
+int LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent);
 
 /*
  * Таблица для отображения символов (ASCII[0x20-0x7F] + CP1251[0xC0-0xFF] = всего 160 символов)

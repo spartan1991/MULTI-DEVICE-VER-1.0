@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\LCD5110 (Driver AVR to STM);.\Screens</IncludePath>
+              <IncludePath>.\LCD5110 (Driver AVR to STM);.\Screens;.\CMSIS\CM3\CoreSupport;.\STM32F10x_StdPeriph_Driver\inc;.\STM32F10x_StdPeriph_Driver\STM32F10x_StdPeriph_Template;.\CMSIS\CM3\DeviceSupport\ST\STM32F10x;.\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm;.\Cpu-Init</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -412,9 +412,68 @@
         </Group>
         <Group>
           <GroupName>periph-driver</GroupName>
+          <Files>
+            <File>
+              <FileName>stm32f10x_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>cmsis-core</GroupName>
+          <Files>
+            <File>
+              <FileName>core_cm3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS\CM3\CoreSupport\core_cm3.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>startup</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_stm32f10x_cl.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm\startup_stm32f10x_cl.s</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f10x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>cpu-init</GroupName>
+          <Files>
+            <File>
+              <FileName>cpu-init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Cpu-Init\cpu-init.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>

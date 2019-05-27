@@ -2,12 +2,15 @@
 
 byte bootScreen(byte percent){
 	
-	LcdProgressBar(20, 20, 30, 10, 0, 1, PIXEL_ON, percent);
+	LcdProgressBar(5, 5, 30, 30, 1, 2, PIXEL_ON, percent);
 	return OK;
 }
 
-byte bootTextScreen(byte* text, byte percent){
+byte bootTextScreen(byte percent){
 	
+	LcdGotoXYFont(1, 2);
+	LcdFStr(FONT_1X, (byte*)"Loading...");
+	LcdProgressBar(4, 26, 75, 2, 0, 0, PIXEL_ON, percent);
 	return OK;
 }
 

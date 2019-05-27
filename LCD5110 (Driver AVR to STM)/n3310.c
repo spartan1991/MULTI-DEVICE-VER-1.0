@@ -20,7 +20,7 @@ void Delay_US(__IO uint32_t nTime);
 #endif
 
 #ifndef AVR
-        #define memcpy_P(...) memcpy(__VA_ARGS__)
+        //#define memcpy_P(...) memcpy(__VA_ARGS__)
 #endif
 
 #ifndef PSTR
@@ -633,42 +633,39 @@ byte LcdCircle(byte x, byte y, byte radius, LcdPixelMode mode)
 /*
  * Имя                   :  LcdSingleBar
  * Описание              :  Рисует один закрашенный прямоугольник
- * Аргумент(ы)           :  baseX  -> абсолютная координата x (нижний левый угол)
- *                          baseY  -> абсолютная координата y (нижний левый угол)
- *                          height -> высота (в пикселях)
- *                          width  -> ширина (в пикселях)
+ * Аргумент(ы)           :  x1    -> абсолютная координата x левого верхнего угла
+ *                          y1    -> абсолютная координата y левого верхнего угла
+ *                          x2    -> абсолютная координата x правого нижнего угла
+ *                          y2    -> абсолютная координата y правого нижнего угла
  *                          mode   -> Off, On или Xor. Смотри enum в n3310.h
  * Возвращаемое значение :  смотри возвращаемое значение в n3310lcd.h
  */
-byte LcdSingleBar ( byte baseX, byte baseY, byte height, byte width, LcdPixelMode mode )
+byte LcdSingleBar ( byte x1, byte y1, byte x2, byte y2, LcdPixelMode mode )
 {
     byte tmpIdxX,tmpIdxY,tmp;
-
     byte response;
 
     // Проверка границ
-    if ( ( baseX >= LCD_X_RES) || ( baseY >= LCD_Y_RES) ) return OUT_OF_BORDER;
+    if ( ( x1 >= LCD_X_RES) || ( y1 >= LCD_Y_RES) ) return OUT_OF_BORDER;
 
-    if ( height > baseY )
-        tmp = 0;
-    else
-        tmp = baseY - height + 1;
-
-    // Рисование линий
-    for ( tmpIdxY = tmp; tmpIdxY <= baseY; tmpIdxY++ )
-    {
-        for ( tmpIdxX = baseX; tmpIdxX < (baseX + width); tmpIdxX++ )
-        {
-            response = LcdPixel( tmpIdxX, tmpIdxY, mode );
-            if(response)
+		// Рисование линий
+    if ( y2 > y1 && x2 > x1)
+		{
+			  for ( tmpIdxY = y1; tmpIdxY <= y2; tmpIdxY++ )
+				{
+						for ( tmpIdxX = x1; tmpIdxX < x2; tmpIdxX++ )
+						{
+								response = LcdPixel( tmpIdxX, tmpIdxY, mode );
+								if(response)
                 return response;
-
-        }
-    }
-
-    // Установка флага изменений кэша
-    UpdateLcd = TRUE;
-    return OK;
+						}
+				}
+				// Установка флага изменений кэша
+				UpdateLcd = TRUE;
+				return OK;
+		}
+		
+		else return 0;
 }
 
 /*
@@ -778,8 +775,8 @@ void LcdImage(const byte *imageData)
 }
 
 /*
- * Имя                   :  LcdVariable
- * Описание              :  Выводит значение переменной
+ * Имя                   :  IntToString
+ * Описание              :  Преобразование числа(int) в строку
  * Аргумент(ы)           :  Переменная (указатель на переменную)
  * Возвращаемое значение :  Нет
  */
@@ -788,7 +785,7 @@ unsigned char SYMBOLS[DIG_BASE] =
 {'0','1','2','3','4','5','6','7','8','9'}; // Массив символов, соответствующих цифрам выбранной системы
 unsigned char out[MAX_SIZE];               // Выходной массив символов
 
-void LcdVariable(unsigned int NUM)
+void IntToString(unsigned int NUM)
  {
 	 int i, m;
 	 for(i=MAX_SIZE-1; i>=0; i--)
@@ -828,15 +825,43 @@ void LcdVariable(unsigned int NUM)
  * Аргумент(ы)           :  
  * Возвращаемое значение :  Нет
  */
- void LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent)
+ int LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent)
  {
 	 byte barPercent = RangeCheck(0, 100, percent);
-	 byte barX = baseX; 
-	 byte barY = baseY;
-	 byte barWidth = baseX+width; 
-	 byte barHeight = baseY+height;
-	  
-	 LcdRect(barX, barY, barWidth, barHeight);
+	 byte x1, y1, x2, y2;
+	 float result;
 	 
-	 return OK;
+	 LcdRect(baseX, baseY, baseX+width, baseY+height, mode);
+	 
+	 switch(rotate){
+		 
+		 case 0: {
+		 
+			 result = ((float)(width-gap*2)/100)*barPercent;
+			 
+			 x1 = baseX+gap;
+	     y1 = baseY+gap;
+	     x2 = x1+result;
+	     y2 = (baseY+height)-gap;
+			 
+			 if(barPercent==100) ++x2;
+			 LcdSingleBar(x1, y1, x2, y2, mode); 
+		 };
+		 
+		 case 1: {
+		 /*
+			 result = ((float)(height-gap*2)/100)*barPercent;
+			 
+			 x1 = baseX+gap;
+			 x2 = (x1+width)-gap;
+	     y2 = (baseY+height)-gap;
+	     y1 = (y2-result)+gap;
+			 
+			 LcdSingleBar(x1, y1, x2, y2, mode); 
+			 */
+		 };
+	 }
+	 
+	 return barPercent;
  }
+ 
