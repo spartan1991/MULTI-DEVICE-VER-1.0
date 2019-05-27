@@ -1,0 +1,11 @@
+Dependencies for Project 'multi-device-ver-1.0', Target 'source': (DO NOT MODIFY !)
+F (.\Main\main.c)(0x5CDB4ADA)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I ".\LCD5110 (Driver AVR to STM)" -I .\Screens-I.\RTE\_source-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (.\Screens\screens.h)(0x5CDB4A1C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BC994)
+I (.\LCD5110 (Driver AVR to STM)\n3310.h)(0x5CDB478F)
+F (.\Screens\screens.c)(0x5CDB4AD3)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I ".\LCD5110 (Driver AVR to STM)" -I .\Screens-I.\RTE\_source-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD-o .\objects\screens.o --omf_browse .\objects\screens.crf --depend .\objects\screens.d)
+I (Screens\screens.h)(0x5CDB4A1C)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x588BC994)
+I (.\LCD5110 (Driver AVR to STM)\n3310.h)(0x5CDB478F)
+F (.\LCD5110 (Driver AVR to STM)\n3310.c)(0x5CDB478F)(--c99 -c --cpu Cortex-M3 -D__EVAL -g -O0 --apcs=interwork --split_sections -I ".\LCD5110 (Driver AVR to STM)" -I .\Screens-I.\RTE\_source-IC:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD-o .\objects\n3310.o --omf_browse .\objects\n3310.crf --depend .\objects\n3310.d)
+I (C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include\stm32f10x.h)(0x58257EBC)
