@@ -822,7 +822,14 @@ void IntToString(unsigned int NUM)
  /*
  * Имя                   :  LcdProgressBar
  * Описание              :  Выводит ProgressBar
- * Аргумент(ы)           :  
+ * Аргумент(ы)           :  baseX   -> абсолютная координата x левого верхнего угла
+ *                       :  baseY   -> абсолютная координата y левого верхнего угла
+ *                       :  width   -> длина ProgressBar-а
+ *                       :  height  -> высота ProgressBar-а
+ *                       :  rotate  -> 0 - горизонтальное заполнение \ 1 - вертикальное
+ *                       :  gap     -> (число) отступ заполнения от рамки ProgressBar-а
+ *                       :  mode    -> Off, On или Xor. Смотри enum в n3310.h 
+ *                       :  percent -> процент заполнения ProgressBar-а
  * Возвращаемое значение :  Нет
  */
  int LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent)
@@ -846,20 +853,20 @@ void IntToString(unsigned int NUM)
 			 
 			 if(barPercent==100) ++x2;
 			 LcdSingleBar(x1, y1, x2, y2, mode); 
-		 };
+		 }break;
 		 
 		 case 1: {
-		 /*
+
 			 result = ((float)(height-gap*2)/100)*barPercent;
 			 
 			 x1 = baseX+gap;
-			 x2 = (x1+width)-gap;
-	     y2 = (baseY+height)-gap;
-	     y1 = (y2-result)+gap;
+			 x2 = (x1+width)-gap*2+1;
+			 y2 = (baseY+height)-gap;
+			 y1 = (y2-result);
+	     
 			 
 			 LcdSingleBar(x1, y1, x2, y2, mode); 
-			 */
-		 };
+		 }break;
 	 }
 	 
 	 return barPercent;

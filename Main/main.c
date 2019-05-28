@@ -6,6 +6,6 @@ int main(void){
 	system_init();
 	LcdInit();
 	LcdClear();
-	bootScreen(100);
+	bootTextScreen(50);
 	LcdUpdate();
 }

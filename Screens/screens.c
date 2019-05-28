@@ -2,7 +2,7 @@
 
 byte bootScreen(byte percent){
 	
-	LcdProgressBar(5, 5, 30, 30, 1, 2, PIXEL_ON, percent);
+	LcdProgressBar(4, 26, 75, 2, 0, 0, PIXEL_ON, percent);
 	return OK;
 }
 
