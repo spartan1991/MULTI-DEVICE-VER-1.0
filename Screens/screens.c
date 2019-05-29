@@ -50,3 +50,24 @@ byte mainMenuScreen(byte choice){
 	
 	return OK;
 }
+
+byte testScreen(byte choice){
+	
+	LcdProgressBar(1, 1, 3, 30, 1, 0, PIXEL_ON, 75);
+	LcdProgressBar(6, 1, 3, 30, 1, 0, PIXEL_ON, 25);
+	LcdProgressBar(65, 1, 15, 4, 0, 0, PIXEL_ON, 35);
+	LcdLine(81, 2, 81, 4, PIXEL_ON);
+	LcdProgressBar(65, 7, 15, 4, 0, 0, PIXEL_ON, 75);
+	LcdLine(81, 8, 81, 10, PIXEL_ON);
+	
+	LcdGotoXYFont(4, 0);
+	LcdFStr(FONT_1X, (byte*)"23:33");
+	LcdGotoXYFont(3, 2);
+	LcdFStr(FONT_1X, (byte*)"Kyivstar");
+	LcdGotoXYFont(0, 5);
+	LcdFStr(FONT_1X, (byte*)"Menu");
+	LcdGotoXYFont(10, 5);
+	LcdFStr(FONT_1X, (byte*)"Call");
+	
+	return OK;
+}

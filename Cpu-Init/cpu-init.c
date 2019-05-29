@@ -174,7 +174,7 @@ void InitButton()
 	EXTI_InitTypeDefStructure.EXTI_Line = EXTI_Line5 | EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9;
 	EXTI_InitTypeDefStructure.EXTI_LineCmd = ENABLE;
 	EXTI_InitTypeDefStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-	EXTI_InitTypeDefStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+	EXTI_InitTypeDefStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
 	EXTI_Init(&EXTI_InitTypeDefStructure);
 	//EXTI_ClearITPendingBit(EXTI_Line5 | EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9);
 

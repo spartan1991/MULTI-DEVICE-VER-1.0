@@ -10,6 +10,8 @@ int main(void){
 	while(1){
 		
 	  LcdClear();
+		
+		testScreen(1);
 		mouseLayerScreen(1);
 		LcdUpdate();
 	};

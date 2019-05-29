@@ -1,5 +1,6 @@
 #include "system.h"
 #include "models.h"
+#include "stm32f10x_gpio.h"
 
 #define LEFT   5
 #define UP     8
@@ -17,13 +18,18 @@ void setPressedButton(uint8_t button){
 	*buttonPtr = button;
 }
 
+void resetPressedButton(void){
+	
+	setPressedButton(NULL);
+}
+
 uint8_t getPressedButton(void){
 	
 	return *buttonPtr;
 }
 
 // MOUSE
-MOUSE_StateData_TypeDef mouseData = {55, 35, 0};
+MOUSE_StateData_TypeDef mouseData = {40, 42, 0};
 MOUSE_StateData_TypeDef* mouseDataPtr = &mouseData;
 
 MOUSE_StateData_TypeDef getMouseData(){
@@ -40,29 +46,33 @@ void mouseKeyboardHendler(void){
 		
 		case LEFT: {
 		
-			if(*mouseX>=0){*mouseX-=1;}
-			setPressedButton(NULL);
+			if(*mouseX>0){*mouseX-=1;}
+			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5)==0)  // TEST (REFACTOR)
+			resetPressedButton();
 			
 		};break;
 		
 		case UP: {
 		
-			if(*mouseY>=0){*mouseY-=1;}
-			setPressedButton(NULL);
+			if(*mouseY>0){*mouseY-=1;}
+			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8)==0)  // TEST (REFACTOR)
+			resetPressedButton();
 			
 		};break;
 		
 		case RIGHT: {
 		
-			if(*mouseX<=83){*mouseX+=1;}
-			setPressedButton(NULL);
+			if(*mouseX<83-3){*mouseX+=1;}
+			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9)==0)  // TEST (REFACTOR)
+			resetPressedButton();
 			
 		};break;
 		
 		case DOWN: {
 		
-			if(*mouseY<=47){*mouseY+=1;}
-			setPressedButton(NULL);
+			if(*mouseY<47-3){*mouseY+=1;}
+			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6)==0)  // TEST (REFACTOR)
+			resetPressedButton();
 			
 		};break;
 		

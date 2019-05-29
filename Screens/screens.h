@@ -7,3 +7,4 @@ byte homeScreen(byte* operatorName, byte batPercent, byte gsmSignal, byte gpsSig
 byte mainMenuScreen(byte choice);
 byte logInScreen(byte val);
 byte mouseLayerScreen(byte val);
+byte testScreen(byte choice);
