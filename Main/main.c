@@ -6,6 +6,10 @@ int main(void){
 	system_init();
 	LcdInit();
 	LcdClear();
-	bootTextScreen(50);
+	//logInScreen(1);
+	//bootTextScreen(50);
+	LcdMouse(55, 35, 3, PIXEL_ON, 1);
+	
+	while(1){LcdUpdate();};
 	LcdUpdate();
 }

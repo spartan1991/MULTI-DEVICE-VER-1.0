@@ -809,7 +809,9 @@ void IntToString(unsigned int NUM)
  /*
  * Имя                   :  RangeCheck
  * Описание              :  Проверка диапазона
- * Аргумент(ы)           :  
+ * Аргумент(ы)           :  min    -> нижний предел
+ *                       :  max    -> верхний предел
+ *                       :  value  -> проверяемое значение
  * Возвращаемое значение :  Значение
  */
  byte RangeCheck(byte min, byte max, byte value)
@@ -830,7 +832,7 @@ void IntToString(unsigned int NUM)
  *                       :  gap     -> (число) отступ заполнения от рамки ProgressBar-а
  *                       :  mode    -> Off, On или Xor. Смотри enum в n3310.h 
  *                       :  percent -> процент заполнения ProgressBar-а
- * Возвращаемое значение :  Нет
+ * Возвращаемое значение :  возвращает текущий процент
  */
  int LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent)
  {
@@ -870,5 +872,21 @@ void IntToString(unsigned int NUM)
 	 }
 	 
 	 return barPercent;
+ }
+ 
+ /*
+ * Имя                   :  LcdMouse
+ * Описание              :  Выводит указатель мыши
+ * Аргумент(ы)           :         X    -> координата X вершины указателя
+ *                       :         Y    -> координата Y вершины указателя
+ *                       :  mouseAction -> действие\нажатие
+ * Возвращаемое значение :  
+ */
+ void LcdMouse(byte x, byte y, byte size, LcdPixelMode mode, byte action)
+ {
+	 
+	 LcdLine(x, y, x+size, y+1, mode);
+	 LcdLine(x, y, (x+1)+size, (y+1)+size, mode);
+	 LcdLine(x, y, x+1, y+size, mode);
  }
  

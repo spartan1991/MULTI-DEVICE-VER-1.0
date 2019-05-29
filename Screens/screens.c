@@ -14,6 +14,22 @@ byte bootTextScreen(byte percent){
 	return OK;
 }
 
+byte logInScreen(byte val){
+	
+	LcdGotoXYFont(0, 0);
+	LcdFStr(FONT_1X, (byte*)"Login:");
+	LcdGotoXYFont(0, 1);
+	LcdFStr(FONT_1X, (byte*)"vc_system@ukr.net");
+	LcdGotoXYFont(0, 3);
+	LcdFStr(FONT_1X, (byte*)"Password:");
+	LcdGotoXYFont(0, 4);
+	LcdFStr(FONT_1X, (byte*)"vovik1991");
+}
+
+byte mouseLayerScreen(byte val){
+	
+}
+
 byte homeScreen(byte* operatorName, byte batPercent, byte gsmSignal, byte gpsSignal){
 	
 	return OK;

@@ -6,6 +6,9 @@
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_usart.h"
+#include "stm32f10x_exti.h"
+#include "misc.h"
+#include "n3310.h"
 
 #include "cpu-init.h"
 
@@ -24,7 +27,7 @@ void gpio_init(void)
   GPIO_InitTypeDef gpio_porta_lcd;     //Создаём структуру для настройки порта "A" под LCD
 	GPIO_InitTypeDef gpio_porta_usart1;  //Создаём структуру для настройки порта "A" для USART1 (GPS/Wi-Fi)
   GPIO_InitTypeDef gpio_portb_usart3;  //Создаём структуру для настройки порта "B" для USART3 (GSM)
-  GPIO_InitTypeDef gpio_portb_keys;    //Создаём структуру для настройки порта "B" под клавиатуру
+  //GPIO_InitTypeDef gpio_portb_keys;    //Создаём структуру для настройки порта "B" под клавиатуру
 	
   //Настраиваем ноги PA0 - РА4 для работы с LCD по программному SPI
   gpio_porta_lcd.GPIO_Pin = (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4); //Подключаем пины для работы с LCD
@@ -56,11 +59,13 @@ void gpio_init(void)
   gpio_portb_usart3.GPIO_Mode  = GPIO_Mode_AF_PP;
   GPIO_Init(GPIOB, &gpio_portb_usart3);
 
-  //Настраиваем ноги PB5 - РB9 для работы с клавиатурой
-  gpio_portb_keys.GPIO_Pin = (GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9);
-  gpio_portb_keys.GPIO_Mode = GPIO_Mode_IPU;
-  gpio_portb_keys.GPIO_Speed = GPIO_Speed_10MHz;
-  GPIO_Init(GPIOB, &gpio_portb_keys);
+  //Настраиваем ноги PB5 - РB9 для работы с клавиатурой (не по прерываниям)
+//  gpio_portb_keys.GPIO_Pin = (GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9);
+//  gpio_portb_keys.GPIO_Mode = GPIO_Mode_IPU;
+//  gpio_portb_keys.GPIO_Speed = GPIO_Speed_10MHz;
+//  GPIO_Init(GPIOB, &gpio_portb_keys);
+
+
 }
 
 /////************************************************************************************************************************************/////
@@ -142,6 +147,98 @@ void dma1_init(void)
   DMA_Cmd(DMA1_Channel5, ENABLE);	
 }
 
+void InitButton()
+{
+	GPIO_InitTypeDef GPIO_InitStructure;
+	EXTI_InitTypeDef EXTI_InitTypeDefStructure;
+	NVIC_InitTypeDef NVIC_InitStructure;
+
+	/* GPIOB clock enable */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+	/*Включили тактирование AFIO на шине APB2. Этот блок отвечает за внешние прерывания как AF*/
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);
+
+	// Configure PB.5/6/7/8/9 as Input
+	GPIO_InitStructure.GPIO_Pin = (GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9);
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+	//Подключаем порт к прерыванию
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource5);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource6);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource7);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource8);
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOB,GPIO_PinSource9);
+
+	EXTI_InitTypeDefStructure.EXTI_Line = EXTI_Line5 | EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9;
+	EXTI_InitTypeDefStructure.EXTI_LineCmd = ENABLE;
+	EXTI_InitTypeDefStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitTypeDefStructure.EXTI_Trigger = EXTI_Trigger_Falling;
+	EXTI_Init(&EXTI_InitTypeDefStructure);
+	//EXTI_ClearITPendingBit(EXTI_Line5 | EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9);
+
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_Init(&NVIC_InitStructure);
+};
+
+void EXTI9_5_IRQHandler()
+{
+  if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+  {
+		LcdInit();
+		LcdClear();
+		LcdGotoXYFont(0, 0);
+	  LcdFStr(FONT_1X, (byte*)"EXTI_Line5"); // Left Button
+		LcdUpdate();
+		
+	  EXTI_ClearITPendingBit(EXTI_Line5);
+  }
+  else if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+  {
+		//LcdInit();
+		LcdClear();
+		LcdGotoXYFont(0, 0);
+	  LcdFStr(FONT_1X, (byte*)"EXTI_Line6"); // Down Button
+		LcdUpdate();
+		
+	  EXTI_ClearITPendingBit(EXTI_Line6);
+  }
+  else if (EXTI_GetITStatus(EXTI_Line7) != RESET)
+  {	
+		//LcdInit();
+		LcdClear();
+		LcdGotoXYFont(0, 0);
+	  LcdFStr(FONT_1X, (byte*)"EXTI_Line7"); // Center Button
+		LcdUpdate();
+		
+	  EXTI_ClearITPendingBit(EXTI_Line7);
+  }
+	else if (EXTI_GetITStatus(EXTI_Line8) != RESET)
+  {
+		//LcdInit();
+		LcdClear();
+		LcdGotoXYFont(0, 0);
+	  LcdFStr(FONT_1X, (byte*)"EXTI_Line8"); // Up Button
+		LcdUpdate();
+		
+	  EXTI_ClearITPendingBit(EXTI_Line8);
+  }
+  else if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+  {
+		//LcdInit();
+		LcdClear();
+		LcdGotoXYFont(0, 0);
+	  LcdFStr(FONT_1X, (byte*)"EXTI_Line9"); // Right Button
+		LcdUpdate();
+		
+	  EXTI_ClearITPendingBit(EXTI_Line9);
+  };
+};
+
 void clearBuffer(uint8_t* buf){
 	
 	for(int i = 0; i < DMA_BUFFER_SIZE; i++){
@@ -172,4 +269,5 @@ void system_init(void)
 	uart1_init();
 	uart3_init();
 	dma1_init();
+	InitButton();
 }
