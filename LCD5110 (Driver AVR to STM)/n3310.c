@@ -882,11 +882,12 @@ void IntToString(unsigned int NUM)
  *                       :  mouseAction -> действие\нажатие
  * Возвращаемое значение :  
  */
- void LcdMouse(byte x, byte y, byte size, LcdPixelMode mode, byte action)
+ void LcdMouse(byte x, byte y, byte action, byte size, LcdPixelMode mode)
  {
 	 
 	 LcdLine(x, y, x+size, y+1, mode);
 	 LcdLine(x, y, (x+1)+size, (y+1)+size, mode);
 	 LcdLine(x, y, x+1, y+size, mode);
  }
+ 
  

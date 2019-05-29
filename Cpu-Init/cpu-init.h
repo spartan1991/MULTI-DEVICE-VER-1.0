@@ -1,5 +1,11 @@
-
 #define DMA_BUFFER_SIZE 80 // Размер буфера DMA
+// Keyboard
+#define LEFT   5
+#define UP     8
+#define RIGHT  9
+#define DOWN   6
+#define CENTER 7
+
 
 void gpio_init(void);
 void uart1_init(void);

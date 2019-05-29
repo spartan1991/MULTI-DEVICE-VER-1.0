@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>.\LCD5110 (Driver AVR to STM);.\Screens;.\CMSIS\CM3\CoreSupport;.\STM32F10x_StdPeriph_Driver\inc;.\STM32F10x_StdPeriph_Driver\STM32F10x_StdPeriph_Template;.\CMSIS\CM3\DeviceSupport\ST\STM32F10x;.\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm;.\Cpu-Init</IncludePath>
+              <IncludePath>.\LCD5110 (Driver AVR to STM);.\Screens;.\CMSIS\CM3\CoreSupport;.\STM32F10x_StdPeriph_Driver\inc;.\STM32F10x_StdPeriph_Driver\STM32F10x_StdPeriph_Template;.\CMSIS\CM3\DeviceSupport\ST\STM32F10x;.\CMSIS\CM3\DeviceSupport\ST\STM32F10x\startup\arm;.\Cpu-Init;.\Models;.\System</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -487,6 +487,26 @@
               <FileName>cpu-init.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Cpu-Init\cpu-init.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>models</GroupName>
+          <Files>
+            <File>
+              <FileName>models.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Models\models.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>system</GroupName>
+          <Files>
+            <File>
+              <FileName>system.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\System\system.c</FilePath>
             </File>
           </Files>
         </Group>

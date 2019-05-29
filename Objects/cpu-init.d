@@ -10,4 +10,6 @@
 .\objects\cpu-init.o: .\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h
 .\objects\cpu-init.o: .\STM32F10x_StdPeriph_Driver\inc\misc.h
 .\objects\cpu-init.o: .\LCD5110 (Driver AVR to STM)\n3310.h
+.\objects\cpu-init.o: .\System\system.h
+.\objects\cpu-init.o: .\Models\models.h
 .\objects\cpu-init.o: Cpu-Init\cpu-init.h

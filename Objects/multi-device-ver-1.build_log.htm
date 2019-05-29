@@ -28,38 +28,47 @@ Project File Date:  05/29/2019
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'source'
 compiling screens.c...
-Screens\screens.c(27): warning:  #940-D: missing return statement at end of non-void function "logInScreen" 
-  }
-Screens\screens.c(31): warning:  #940-D: missing return statement at end of non-void function "mouseLayerScreen" 
-  }
-Screens\screens.c: 2 warnings, 0 errors
+.\System\system.h(9): warning:  #1295-D: Deprecated declaration getMouseData - give arg types
+  MOUSE_StateData_TypeDef getMouseData();
+Screens\screens.c: 1 warning, 0 errors
 compiling main.c...
-Main\main.c(14): warning:  #111-D: statement is unreachable
-  	LcdUpdate();
+.\System\system.h(9): warning:  #1295-D: Deprecated declaration getMouseData - give arg types
+  MOUSE_StateData_TypeDef getMouseData();
 Main\main.c: 1 warning, 0 errors
 compiling n3310.c...
 LCD5110 (Driver AVR to STM)\n3310.c(645): warning:  #177-D: variable "tmp"  was declared but never referenced
       byte tmpIdxX,tmpIdxY,tmp;
-LCD5110 (Driver AVR to STM)\n3310.c(892): warning:  #1-D: last line of file ends without a newline
+LCD5110 (Driver AVR to STM)\n3310.c(893): warning:  #1-D: last line of file ends without a newline
    
 LCD5110 (Driver AVR to STM)\n3310.c(48): warning:  #550-D: variable "UpdateLcd"  was set but never used
   static byte  UpdateLcd;
 LCD5110 (Driver AVR to STM)\n3310.c: 3 warnings, 0 errors
-compiling stm32f10x_dma.c...
 compiling stm32f10x_adc.c...
+compiling stm32f10x_dma.c...
 compiling stm32f10x_gpio.c...
 compiling stm32f10x_usart.c...
 compiling stm32f10x_rcc.c...
 compiling stm32f10x_exti.c...
-compiling core_cm3.c...
 assembling startup_stm32f10x_cl.s...
-compiling system_stm32f10x.c...
+compiling core_cm3.c...
 compiling misc.c...
+compiling system_stm32f10x.c...
+compiling system.c...
+System\system.h(9): warning:  #1295-D: Deprecated declaration getMouseData - give arg types
+  MOUSE_StateData_TypeDef getMouseData();
+System\system.c(43): warning:  #186-D: pointless comparison of unsigned integer with zero
+  			if(*mouseX>=0){*mouseX-=1;}
+System\system.c(50): warning:  #186-D: pointless comparison of unsigned integer with zero
+  			if(*mouseY>=0){*mouseY-=1;}
+System\system.c: 3 warnings, 0 errors
 compiling cpu-init.c...
+.\System\system.h(9): warning:  #1295-D: Deprecated declaration getMouseData - give arg types
+  MOUSE_StateData_TypeDef getMouseData();
+Cpu-Init\cpu-init.c: 1 warning, 0 errors
 linking...
-Program Size: Code=4528 RO-data=1168 RW-data=56 ZI-data=2296  
+Program Size: Code=4060 RO-data=368 RW-data=76 ZI-data=2300  
 FromELF: creating hex file...
-".\Objects\multi-device-ver-1.0" - 0 Error(s), 6 Warning(s).
+".\Objects\multi-device-ver-1.0" - 0 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -73,7 +82,7 @@ Package Vendor: Keil
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

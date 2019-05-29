@@ -9,7 +9,7 @@
 #include "stm32f10x_exti.h"
 #include "misc.h"
 #include "n3310.h"
-
+#include "system.h"
 #include "cpu-init.h"
 
 uint8_t TransitBuffer[DMA_BUFFER_SIZE]; // Транзитный буффер, для хранения временных данных, полученных с 
@@ -187,56 +187,36 @@ void InitButton()
 
 void EXTI9_5_IRQHandler()
 {
-  if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+  if (EXTI_GetITStatus(EXTI_Line5) != RESET)      // Left Button
   {
-		LcdInit();
-		LcdClear();
-		LcdGotoXYFont(0, 0);
-	  LcdFStr(FONT_1X, (byte*)"EXTI_Line5"); // Left Button
-		LcdUpdate();
+		setPressedButton(LEFT);
 		
 	  EXTI_ClearITPendingBit(EXTI_Line5);
   }
-  else if (EXTI_GetITStatus(EXTI_Line6) != RESET)
+	else if (EXTI_GetITStatus(EXTI_Line8) != RESET) // Up Button
   {
-		//LcdInit();
-		LcdClear();
-		LcdGotoXYFont(0, 0);
-	  LcdFStr(FONT_1X, (byte*)"EXTI_Line6"); // Down Button
-		LcdUpdate();
-		
-	  EXTI_ClearITPendingBit(EXTI_Line6);
-  }
-  else if (EXTI_GetITStatus(EXTI_Line7) != RESET)
-  {	
-		//LcdInit();
-		LcdClear();
-		LcdGotoXYFont(0, 0);
-	  LcdFStr(FONT_1X, (byte*)"EXTI_Line7"); // Center Button
-		LcdUpdate();
-		
-	  EXTI_ClearITPendingBit(EXTI_Line7);
-  }
-	else if (EXTI_GetITStatus(EXTI_Line8) != RESET)
-  {
-		//LcdInit();
-		LcdClear();
-		LcdGotoXYFont(0, 0);
-	  LcdFStr(FONT_1X, (byte*)"EXTI_Line8"); // Up Button
-		LcdUpdate();
+		setPressedButton(UP);
 		
 	  EXTI_ClearITPendingBit(EXTI_Line8);
   }
-  else if (EXTI_GetITStatus(EXTI_Line9) != RESET)
+	  else if (EXTI_GetITStatus(EXTI_Line9) != RESET) // Right Button
   {
-		//LcdInit();
-		LcdClear();
-		LcdGotoXYFont(0, 0);
-	  LcdFStr(FONT_1X, (byte*)"EXTI_Line9"); // Right Button
-		LcdUpdate();
+		setPressedButton(RIGHT);
 		
 	  EXTI_ClearITPendingBit(EXTI_Line9);
-  };
+  }
+  else if (EXTI_GetITStatus(EXTI_Line6) != RESET) // Down Button
+  {
+		setPressedButton(DOWN);
+		
+	  EXTI_ClearITPendingBit(EXTI_Line6);
+  }
+  else if (EXTI_GetITStatus(EXTI_Line7) != RESET) // Center Button
+  {	
+		setPressedButton(CENTER);
+		
+	  EXTI_ClearITPendingBit(EXTI_Line7);
+  }
 };
 
 void clearBuffer(uint8_t* buf){

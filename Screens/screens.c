@@ -1,4 +1,8 @@
 #include "screens.h"
+#include "models.h"
+#include "system.h"
+
+MOUSE_StateData_TypeDef mData;
 
 byte bootScreen(byte percent){
 	
@@ -24,10 +28,17 @@ byte logInScreen(byte val){
 	LcdFStr(FONT_1X, (byte*)"Password:");
 	LcdGotoXYFont(0, 4);
 	LcdFStr(FONT_1X, (byte*)"vovik1991");
+	
+	return OK;
 }
 
 byte mouseLayerScreen(byte val){
 	
+	mData = getMouseData();
+	mouseKeyboardHendler();
+	LcdMouse(mData.x, mData.y, 1, 3, PIXEL_ON);
+	
+	return OK;
 }
 
 byte homeScreen(byte* operatorName, byte batPercent, byte gsmSignal, byte gpsSignal){
