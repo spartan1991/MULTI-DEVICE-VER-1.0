@@ -1,4 +1,16 @@
+#include <stdint.h>
+
+#include "stm32f10x_rcc.h"
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_dma.h"
+#include "stm32f10x_usart.h"
+#include "stm32f10x_exti.h"
+#include "misc.h"
+#include "n3310.h"
+#include "system.h"
+
 #define DMA_BUFFER_SIZE 80 // Размер буфера DMA
+
 // Keyboard
 #define LEFT   5
 #define UP     8

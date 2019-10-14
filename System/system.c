@@ -2,13 +2,6 @@
 #include "models.h"
 #include "stm32f10x_gpio.h"
 
-#define LEFT   5
-#define UP     8
-#define RIGHT  9
-#define DOWN   6
-#define CENTER 7
-#define NULL 0
-
 // BUTTONS
 uint8_t pressedButton = 0;
 uint8_t* buttonPtr = &pressedButton;
@@ -32,7 +25,16 @@ uint8_t getPressedButton(void){
 MOUSE_StateData_TypeDef mouseData = {40, 42, 0};
 MOUSE_StateData_TypeDef* mouseDataPtr = &mouseData;
 
-MOUSE_StateData_TypeDef getMouseData(){
+// CURSORS
+uint8_t cursorsDataY = 1;
+uint8_t *cursorsDataYPtr = &cursorsDataY;
+
+uint8_t getCursorsData(void){
+	
+	return *cursorsDataYPtr;
+}
+
+MOUSE_StateData_TypeDef getMouseData(void){
 
 	return *mouseDataPtr;
 }
@@ -81,4 +83,27 @@ void mouseKeyboardHendler(void){
 		};break;
 	}
 }
-
+	
+void cursorsKeyboardHendler(void){
+	
+	switch(getPressedButton()){
+		
+		case UP: {
+		
+			if(*cursorsDataYPtr>1){*cursorsDataYPtr-=1;}
+			resetPressedButton();
+			
+		};break;
+		
+		case DOWN: {
+		
+			if(*cursorsDataYPtr<5){*cursorsDataYPtr+=1;}
+			resetPressedButton();
+			
+		};break;
+		
+		case CENTER: {
+		
+		};break;
+	};
+ }

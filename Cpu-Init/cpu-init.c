@@ -1,15 +1,5 @@
 // Кодировка UTF-8 //
 
-#include <stdint.h>
-
-#include "stm32f10x_rcc.h"
-#include "stm32f10x_gpio.h"
-#include "stm32f10x_dma.h"
-#include "stm32f10x_usart.h"
-#include "stm32f10x_exti.h"
-#include "misc.h"
-#include "n3310.h"
-#include "system.h"
 #include "cpu-init.h"
 
 uint8_t TransitBuffer[DMA_BUFFER_SIZE]; // Транзитный буффер, для хранения временных данных, полученных с 
@@ -174,7 +164,7 @@ void InitButton()
 	EXTI_InitTypeDefStructure.EXTI_Line = EXTI_Line5 | EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9;
 	EXTI_InitTypeDefStructure.EXTI_LineCmd = ENABLE;
 	EXTI_InitTypeDefStructure.EXTI_Mode = EXTI_Mode_Interrupt;
-	EXTI_InitTypeDefStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
+	EXTI_InitTypeDefStructure.EXTI_Trigger = EXTI_Trigger_Falling;
 	EXTI_Init(&EXTI_InitTypeDefStructure);
 	//EXTI_ClearITPendingBit(EXTI_Line5 | EXTI_Line6 | EXTI_Line7 | EXTI_Line8 | EXTI_Line9);
 

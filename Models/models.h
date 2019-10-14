@@ -11,6 +11,21 @@ typedef struct
 	
 }MOUSE_StateData_TypeDef;
 
+typedef struct
+{
+  char title0[14];       
+	char title1[14];
+  char title2[14]; 
+  char title3[14];       
+	char title4[14];
+  char title5[14]; 	
+	
+}MenuData_TypeDef;
+
+
+
+
+
 
 
 

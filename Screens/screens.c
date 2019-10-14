@@ -1,6 +1,4 @@
 #include "screens.h"
-#include "models.h"
-#include "system.h"
 
 MOUSE_StateData_TypeDef mData;
 
@@ -46,7 +44,16 @@ byte homeScreen(byte* operatorName, byte batPercent, byte gsmSignal, byte gpsSig
 	return OK;
 }
 
-byte mainMenuScreen(byte choice){
+byte MenuScreen(MenuData_TypeDef menuData){
+	
+	LcdGotoXYFont(0, getCursorsData()); LcdChr(FONT_1X, '<'); LcdGotoXYFont(13, getCursorsData()); LcdChr(FONT_1X, '>');
+	
+	LcdGotoXYFont(1, 0); LcdStr(FONT_1X, (byte*)menuData.title0); //Menu header
+	LcdGotoXYFont(1, 1); LcdStr(FONT_1X, (byte*)menuData.title1);
+	LcdGotoXYFont(1, 2); LcdStr(FONT_1X, (byte*)menuData.title2);
+	LcdGotoXYFont(1, 3); LcdStr(FONT_1X, (byte*)menuData.title3);
+	LcdGotoXYFont(1, 4); LcdStr(FONT_1X, (byte*)menuData.title4);
+	LcdGotoXYFont(1, 5); LcdStr(FONT_1X, (byte*)menuData.title5);
 	
 	return OK;
 }

@@ -45,7 +45,7 @@ static int   HiWaterMark;   // верхняя граница
 static int   LcdCacheIdx;
 
 // Флаг изменений кэша
-static byte  UpdateLcd;
+static byte UpdateLcd;
 
 /*
  * Имя                   :  LcdInit
@@ -889,5 +889,4 @@ void IntToString(unsigned int NUM)
 	 LcdLine(x, y, (x+1)+size, (y+1)+size, mode);
 	 LcdLine(x, y, x+1, y+size, mode);
  }
- 
  
