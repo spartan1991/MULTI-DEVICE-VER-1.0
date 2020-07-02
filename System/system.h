@@ -12,7 +12,7 @@
 
 void setPressedButton(uint8_t button);
 uint8_t getPressedButton(void);
-void mouseKeyboardHendler(void);
+uint8_t mouseKeyboardHendler(void);
 void cursorsKeyboardHendler(void);
 MOUSE_StateData_TypeDef getMouseData(void);
 uint8_t getCursorsData(void);

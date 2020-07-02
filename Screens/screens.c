@@ -78,3 +78,17 @@ byte testScreen(byte choice){
 	
 	return OK;
 }
+
+byte manLayerScreen(byte val){
+	
+	byte action = 0;
+	
+	mData = getMouseData();
+	action = mouseKeyboardHendler();
+	LcdMan(mData.x, mData.y, mData.course, mData.action, 1);
+	
+	//LcdMan(mData.x+30, mData.y, mData.course, mData.action, 0);
+	//LcdMan(mData.x+60, mData.y, mData.course, mData.action, 0);
+	
+	return OK;
+}

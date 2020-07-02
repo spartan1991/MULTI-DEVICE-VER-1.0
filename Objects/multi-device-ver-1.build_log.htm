@@ -5,7 +5,7 @@
 <h2>Tool Versions:</h2>
 IDE-Version: µVision V5.24.2.0
 Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Vladimir Chornenkiy, NTC, LIC=----
+License Information: Vladimir Chornenkiy, Spartan Projects, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.24.1
@@ -21,18 +21,21 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.1.0
 Dialog DLL:      TCM.DLL V1.32.0.0
  
 <h2>Project:</h2>
-C:\Users\Vladimir_Chornenkiy\Desktop\MULTI-DEVICE-VER-1.0\multi-device-ver-1.0.uvprojx
-Project File Date:  10/10/2019
+D:\Projects\MULTI-DEVICE-VER-1.0\multi-device-ver-1.0.uvprojx
+Project File Date:  05/10/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Rebuild target 'source'
 compiling screens.c...
+Screens\screens.c(84): warning:  #550-D: variable "action"  was set but never used
+  	byte action = 0;
+Screens\screens.c: 1 warning, 0 errors
 compiling main.c...
 compiling n3310.c...
 LCD5110 (Driver AVR to STM)\n3310.c(645): warning:  #177-D: variable "tmp"  was declared but never referenced
       byte tmpIdxX,tmpIdxY,tmp;
-LCD5110 (Driver AVR to STM)\n3310.c(892): warning:  #1-D: last line of file ends without a newline
+LCD5110 (Driver AVR to STM)\n3310.c(982): warning:  #1-D: last line of file ends without a newline
    
 LCD5110 (Driver AVR to STM)\n3310.c(48): warning:  #550-D: variable "UpdateLcd"  was set but never used
   static byte UpdateLcd;
@@ -49,10 +52,13 @@ compiling misc.c...
 compiling system_stm32f10x.c...
 compiling cpu-init.c...
 compiling system.c...
+System\system.c(102): warning:  #111-D: statement is unreachable
+  		};break;
+System\system.c: 1 warning, 0 errors
 linking...
-Program Size: Code=4504 RO-data=1168 RW-data=164 ZI-data=2300  
+Program Size: Code=4656 RO-data=368 RW-data=84 ZI-data=2300  
 FromELF: creating hex file...
-".\Objects\multi-device-ver-1.0" - 0 Error(s), 3 Warning(s).
+".\Objects\multi-device-ver-1.0" - 0 Error(s), 5 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,7 +72,7 @@ Package Vendor: Keil
   C:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.3.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

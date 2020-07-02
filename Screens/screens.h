@@ -9,3 +9,4 @@ byte MenuScreen(MenuData_TypeDef menuData);
 byte logInScreen(byte val);
 byte mouseLayerScreen(byte val);
 byte testScreen(byte choice);
+byte manLayerScreen(byte val);

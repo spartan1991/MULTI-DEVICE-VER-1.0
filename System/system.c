@@ -22,7 +22,7 @@ uint8_t getPressedButton(void){
 }
 
 // MOUSE
-MOUSE_StateData_TypeDef mouseData = {40, 42, 0};
+MOUSE_StateData_TypeDef mouseData = {40, 42, 0, 0};
 MOUSE_StateData_TypeDef* mouseDataPtr = &mouseData;
 
 // CURSORS
@@ -39,16 +39,22 @@ MOUSE_StateData_TypeDef getMouseData(void){
 	return *mouseDataPtr;
 }
 
-void mouseKeyboardHendler(void){
+uint8_t mouseKeyboardHendler(void){
 	
 	uint8_t* mouseX = &mouseDataPtr->x;
 	uint8_t* mouseY = &mouseDataPtr->y;
+	uint8_t* mouseCourse = &mouseDataPtr->course;
+	uint8_t* mouseAction = &mouseDataPtr->action;
 	
 	switch(getPressedButton()){
 		
 		case LEFT: {
 		
-			if(*mouseX>0){*mouseX-=1;}
+			if(*mouseX>0){
+				*mouseX-=1;
+				*mouseCourse=0;
+				*mouseAction=0;
+			}
 			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_5)==0)  // TEST (REFACTOR)
 			resetPressedButton();
 			
@@ -56,7 +62,10 @@ void mouseKeyboardHendler(void){
 		
 		case UP: {
 		
-			if(*mouseY>0){*mouseY-=1;}
+			if(*mouseY>0){
+				*mouseY-=1;
+				*mouseAction=0;
+			}
 			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_8)==0)  // TEST (REFACTOR)
 			resetPressedButton();
 			
@@ -64,7 +73,11 @@ void mouseKeyboardHendler(void){
 		
 		case RIGHT: {
 		
-			if(*mouseX<83-3){*mouseX+=1;}
+			if(*mouseX<83-3){
+				*mouseX+=1;
+				*mouseCourse=1;
+				*mouseAction=0;
+			}
 			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_9)==0)  // TEST (REFACTOR)
 			resetPressedButton();
 			
@@ -72,16 +85,24 @@ void mouseKeyboardHendler(void){
 		
 		case DOWN: {
 		
-			if(*mouseY<47-3){*mouseY+=1;}
+			if(*mouseY<47-3){
+				*mouseY+=1;
+				*mouseAction=0;
+			}
 			//if(GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_6)==0)  // TEST (REFACTOR)
 			resetPressedButton();
 			
 		};break;
 		
 		case CENTER: {
-		
+			
+			*mouseAction=1;
+			return 1;
+			
 		};break;
 	}
+	
+	return 0;
 }
 	
 void cursorsKeyboardHendler(void){

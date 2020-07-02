@@ -88,6 +88,7 @@ byte LcdSingleBar ( byte x1, byte y1, byte x2, byte y2, LcdPixelMode mode ); // 
 byte LcdBars       ( byte data[], byte numbBars, byte width, byte multiplier );   // Несколько
 int LcdProgressBar(byte baseX, byte baseY, byte width, byte height, byte rotate, byte gap, LcdPixelMode mode, byte percent);
 void LcdMouse(byte x, byte y, byte action, byte size, LcdPixelMode mode);
+byte LcdMan(byte x, byte y, byte course, byte action, byte cap);
 
 /*
  * Таблица для отображения символов (ASCII[0x20-0x7F] + CP1251[0xC0-0xFF] = всего 160 символов)

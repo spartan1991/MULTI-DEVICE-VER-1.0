@@ -3,7 +3,7 @@
 
 MenuData_TypeDef mainMenu = {
 	
-	"^^^^MENU^^^^",
+	"    MENU    ",
 	"GSM",
 	"GPS",
 	"WI-FI",
@@ -23,8 +23,11 @@ int main(void){
 		
 		//testScreen(1);
 		//mouseLayerScreen(1);
-		MenuScreen(mainMenu);
-		cursorsKeyboardHendler();
+		//MenuScreen(mainMenu);
+		//cursorsKeyboardHendler();	
+		
+		manLayerScreen(1);
+		
 		LcdUpdate();
 	};
 }

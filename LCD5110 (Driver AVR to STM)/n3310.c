@@ -889,4 +889,94 @@ void IntToString(unsigned int NUM)
 	 LcdLine(x, y, (x+1)+size, (y+1)+size, mode);
 	 LcdLine(x, y, x+1, y+size, mode);
  }
+
+ /*
+ * Имя                   :  LcdMan
+ * Описание              :  Рисует человечка
+ * Аргумент(ы)           :         X    -> координата X левой ступни
+ *                       :         Y    -> координата Y левой ступни
+ *                       :       course -> направление
+ *                       :       action -> действие\нажатие
+ * Возвращаемое значение :  
+ */
+byte LcdMan(byte x, byte y, byte course, byte action, byte cap){
+
+// 0123456789012345678
+//0-------------------
+//1--------XXX--------	
+//2-------XXXXX-------
+//3--------XXX--------
+//4---------X---------
+//5-------XXXXX-------
+//6------XXXXXXX------
+//7-----XX-XXX-XX-----
+//8-----X--XXX--X-----
+//9--------XXX--------
+//0-------XX-XX-------
+//1------XX---XX------
+//2------X-----X------
+//3-----XX-----XX-----	
+	
+	
+//  x = 4 // y = 10	
+	
+//	LcdLine(4,1,6,1,PIXEL_ON);	//HEAD
+//  LcdLine(3,2,7,2,PIXEL_ON);	//HEAD
+//  LcdLine(4,3,6,3,PIXEL_ON);  //HEAD
+//		
+//  LcdLine(5,4,5,4,PIXEL_ON);	//NECK
+//		
+//  LcdLine(4,5,4,9,PIXEL_ON);  //BODY
+//	LcdLine(5,5,5,9,PIXEL_ON);  //BODY
+//	LcdLine(6,5,6,9,PIXEL_ON);  //BODY
+//	
+//	LcdLine(7,5,9,8,PIXEL_ON);  //RIGHT HAND
+//	LcdLine(3,5,1,8,PIXEL_ON);  //LEFT HAND
+//	
+//	LcdLine(6,10,8,13,PIXEL_ON); //RIGHT FOOT
+//	LcdLine(4,10,2,13,PIXEL_ON); //LEFT FOOT (X,Y start point)
+	
+	///////////////////////////////////////////
+	
+	LcdLine(x,y-9,x+2,y-9,PIXEL_ON);	//HEAD
+	if(cap==1){
+		LcdLine(x-1,y-8,x+3,y-8,PIXEL_ON);	//CAP
+	}
+  LcdLine(x,y-8,x+2,y-8,PIXEL_ON);	//HEAD
+  LcdLine(x,y-7,x+2,y-7,PIXEL_ON);  //HEAD
+		
+  LcdLine(x+1,y-6,x+1,y-6,PIXEL_ON);	//NECK
+		
+  LcdLine(x,y-5,x,y-1,PIXEL_ON);  //BODY
+	LcdLine(x+1,y-5,x+1,y-1,PIXEL_ON);  //BODY
+	LcdLine(x+2,y-5,x+2,y-1,PIXEL_ON);  //BODY
+	
+	if(action==0){
+		LcdLine(x+3,y-5,x+5,y-2,PIXEL_ON);  //RIGHT HAND
+		LcdLine(x-1,y-5,x-3,y-2,PIXEL_ON);  //LEFT HAND
+	}
+	
+	if(action==1&&course==1){
+		LcdLine(x+3,y-4,x+6,y-4,PIXEL_ON);  //RIGHT HAND
+		LcdLine(x+5,y-5,x+8,y-5,PIXEL_ON);  //GUN
+		
+		for(int8_t i=10; i<=50; i+=4){ 
+			LcdPixel(x+i, y-5, PIXEL_ON);  //SHOT
+		}
+	}
+	
+	if(action==1&&course==0){
+		LcdLine(x-1,y-4,x-4,y-4,PIXEL_ON);  //LEFT HAND
+		LcdLine(x-3,y-5,x-6,y-5,PIXEL_ON);  //GUN
+		
+		for(int8_t i=-8; i>=-50; i-=4){ 
+			LcdPixel(x+i, y-5, PIXEL_ON);  //SHOT
+		}
+	}
+	
+	LcdLine(x+2,y,x+4,y+3,PIXEL_ON); //RIGHT FOOT
+	LcdLine(x,y,x-2,y+3,PIXEL_ON); //LEFT FOOT
+	
+	return OK;
+}
  
